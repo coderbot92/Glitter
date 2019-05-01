@@ -8,7 +8,7 @@ Glitter is a dead simple boilerplate for OpenGL, intended as a starting point fo
 Glitter has a single dependency: [cmake](http://www.cmake.org/download/), which is used to generate platform-specific makefiles or project files. Start by cloning this repository, making sure to pass the `--recursive` flag to grab all the dependencies. If you forgot, then you can `git submodule update --init` instead.
 
 ```bash
-git clone --recursive https://github.com/Polytonic/Glitter
+git clone --recursive https://github.com/coderbot92/Glitter.git
 cd Glitter
 cd Build
 ```
@@ -28,7 +28,13 @@ cmake -G "Visual Studio 14 Win64" ..
 ...
 ```
 
-If you compile and run, you should now be at the same point as the [Hello Window](http://www.learnopengl.com/#!Getting-started/Hello-Window) or [Context Creation](https://open.gl/context) sections of the tutorials. Open [main.cpp](https://github.com/Polytonic/Glitter/blob/master/Glitter/Sources/main.cpp) on your computer and start writing code!
+```bash
+# UNIX Build and Run
+make
+./Glitter/Glitter
+```
+
+If you compile and run, you should now be at the same point as the [Hello Window](http://www.learnopengl.com/#!Getting-started/Hello-Window) or [Context Creation](https://open.gl/context) sections of the tutorials. Open [main.cpp](https://github.com/coderbot92/Glitter/blob/master/Glitter/Sources/main.cpp) on your computer and start writing code!
 
 ## Documentation
 Many people overlook how frustrating it is to install dependencies, especially in environments lacking package managers or administrative privileges. For beginners, just getting set up properly set up can be a huge challenge. Glitter is meant to help you overcome that roadblock.
