@@ -4,6 +4,14 @@
 ## Summary
 Glitter is a dead simple boilerplate for OpenGL, intended as a starting point for the tutorials on [learnopengl.com](http://www.learnopengl.com) and [open.gl](https://open.gl). Glitter compiles and statically links every required library, so you can jump right into doing what you probably want: how to get started with OpenGL.
 
+## Git Configurations
+* The git configurations are present in the file .gitconfig in the repo root
+* Change the configurations according to your needs
+* After cloning repo the following command must be run to incorporate these configs locally:
+```bash
+$ git config --local include.path ../.gitconfig
+```
+
 ## Getting Started
 Glitter has a single dependency: [cmake](http://www.cmake.org/download/), which is used to generate platform-specific makefiles or project files. Start by cloning this repository, making sure to pass the `--recursive` flag to grab all the dependencies. If you forgot, then you can `git submodule update --init` instead.
 
@@ -23,9 +31,8 @@ cmake ..
 cmake -G "Xcode" ..
 
 # Microsoft Windows
-cmake -G "Visual Studio 14" ..
-cmake -G "Visual Studio 14 Win64" ..
-...
+cmake -G "Visual Studio 14 2015" ..
+cmake -G "Visual Studio 14 2015 Win64" ..
 ```
 
 ```bash
