@@ -11,6 +11,15 @@ Glitter is a dead simple boilerplate for OpenGL, intended as a starting point fo
 ```bash
 $ git config --local include.path ../.gitconfig
 ```
+* To verify and see the git configurations for current repository:
+```bash
+$ git config --list
+```
+* To see the list of remotes and see the details of a particular remote e.g. to see which branches are tracked:
+```bash
+$ git remote -v
+$ git remote show origin
+```
 
 ## Getting Started
 Glitter has a single dependency: [cmake](http://www.cmake.org/download/), which is used to generate platform-specific makefiles or project files. Start by cloning this repository, making sure to pass the `--recursive` flag to grab all the dependencies. If you forgot, then you can `git submodule update --init` instead.
