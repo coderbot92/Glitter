@@ -20,7 +20,7 @@
 #include <stb_image.h>
 
 // Define Some Constants
-int const mWidth = 1280;
-int const mHeight = 800;
+unsigned int const m_width = 1280;
+unsigned int const m_height = 800;
 
 #endif // #ifndef GLITTER

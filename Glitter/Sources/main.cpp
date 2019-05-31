@@ -1,55 +1,96 @@
-// Local Headers
+// local headers
 #include "glitter.hpp"
 
-// System Headers
+// system headers
 // glad should be included before all other headers
 // that need opengl as glad includes OpenGL header in it
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-// Standard Headers
+// standard headers
 #include <cstdio>
 #include <cstdlib>
 
+void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+void processUserInput(GLFWwindow* window);
+
 int main(int argc, char* argv[])
 {
-  // Load GLFW and Create a Window
+  // initialize GLFW and configure
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+#ifdef __APPLE__
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+#endif
 
-  auto mWindow = glfwCreateWindow(mWidth, mHeight, "OpenGL", nullptr, nullptr);
+  //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  // Check for Valid Context
-  if (mWindow == nullptr)
+  // create window and OpenGL context
+  GLFWwindow* m_window = glfwCreateWindow(m_width, m_height, "OpenGL", nullptr, nullptr);
+
+  // check for valid context
+  if (m_window == nullptr)
   {
     fprintf(stderr, "Failed to Create OpenGL Context");
+    glfwTerminate();
     return EXIT_FAILURE;
   }
 
-  // Create Context and Load OpenGL Functions
-  glfwMakeContextCurrent(mWindow);
-  gladLoadGL();
+  // make the context of the window current for this thread
+  glfwMakeContextCurrent(m_window);
+
+  // set the callback that will be fired when the window is resized
+  glfwSetFramebufferSizeCallback(m_window, framebufferSizeCallback);
+
+  // load all OpenGL functions and print version
+  int const status = gladLoadGL();
+  if (!status)
+  {
+    fprintf(stderr, "Failed to Initialize GLAD");
+    glfwTerminate();
+    return EXIT_FAILURE;
+  }
+
   fprintf(stderr, "OpenGL %s\n", glGetString(GL_VERSION));
 
+  //////////////////////////////////////////////////////
   // Rendering Loop
-  while (glfwWindowShouldClose(mWindow) == false)
+  /////////////////////////////////////////////////////
+  while (!glfwWindowShouldClose(m_window))
   {
-    if (glfwGetKey(mWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(mWindow, true);
+    // process user inputs
+    processUserInput(m_window);
 
-    // Background Fill Color
-    glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
+    //////////////////
+    // Render
+    /////////////////
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // Flip Buffers and Draw
-    glfwSwapBuffers(mWindow);
+    // swap buffers and poll for IO events to fire callbacks
+    glfwSwapBuffers(m_window);
     glfwPollEvents();
   }
 
+  // clear GLFW resources
   glfwTerminate();
   return EXIT_SUCCESS;
+}
+
+// query GLFW whether relevant keys are pressed/released and react accordingly
+void processUserInput(GLFWwindow* window)
+{
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, true);
+}
+
+// callback fired when window is resized (by OS or user)
+void framebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+  // set viewport for mapping OpenGL coordinates
+  // according to window size
+  glViewport(0, 0, width, height);
 }
