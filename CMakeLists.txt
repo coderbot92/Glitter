@@ -21,7 +21,7 @@ add_subdirectory(Glitter/Vendor/bullet)
 if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -std=c++17")
     if(NOT WIN32)
         set(GLAD_LIBRARIES dl)
     endif()
@@ -46,7 +46,9 @@ file(GLOB PROJECT_CONFIGS CMakeLists.txt
                           Readme.md
                          .gitattributes
                          .gitignore
-                         .gitmodules)
+                         .gitmodules
+                         .gitconfig
+                         .editorconfig)
 
 source_group("Headers" FILES ${PROJECT_HEADERS})
 source_group("Shaders" FILES ${PROJECT_SHADERS})
